@@ -34,5 +34,38 @@ h1 {
 .button:hover {
   background-color: #6E0D25; /* Blood Darker */
 }
+.button::after {
+  content: "";
+  position: absolute;
+  top: -20px;
+  left: 50%;
+  width: 40px;
+  height: 40px;
+  background: radial-gradient(circle, rgba(255,255,255,0.3) 0%, transparent 60%);
+  opacity: 0;
+  transform: translateX(-50%) scale(0.5);
+  pointer-events: none;
+  animation: smoke 2s infinite;
+}
+
+.button:hover::after {
+  opacity: 1;
+  transform: translateX(-50%) scale(1);
+}
+
+@keyframes smoke {
+  0% {
+    transform: translateX(-50%) translateY(0) scale(0.5);
+    opacity: 0.4;
+  }
+  50% {
+    transform: translateX(-50%) translateY(-20px) scale(1);
+    opacity: 0.2;
+  }
+  100% {
+    transform: translateX(-50%) translateY(-40px) scale(1.5);
+    opacity: 0;
+  }
+}
 
 
