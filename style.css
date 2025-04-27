@@ -1,67 +1,50 @@
-body, html {
-  margin: 0;
-  padding: 0;
-  height: 100%;
-  overflow: hidden;
-  font-family: 'Courier New', Courier, monospace;
-}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>DoomCoin</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
 
-#sky {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  background-color: #87CEEB; /* blue sky starting color */
-  overflow: hidden;
-}
+  <div id="sky">
+    <div id="clouds"></div>
 
-#clouds {
-  position: absolute;
-  width: 200%;
-  height: 100%;
-  background: url('https://i.imgur.com/Nd5Nq8g.png') repeat-x; /* Free soft cloud image */
-  animation: moveClouds 60s linear infinite;
-  opacity: 0.5;
-}
+    <div class="container">
+      <h1>Doom Coin</h1>
+      <a href="#second-section" class="button">Begin</a>
+    </div>
+  </div>
 
-@keyframes moveClouds {
-  0% { transform: translateX(0); }
-  100% { transform: translateX(-50%); }
-}
+  <div id="second-section">
+    <!-- Empty white section for now -->
+  </div>
 
-.container {
-  position: relative;
-  z-index: 10;
-  text-align: center;
-  top: 35%;
-  color: white;
-}
+  <script>
+    window.onload = function() {
+      let startTime = Date.now();
 
-h1 {
-  font-size: 2em;
-  margin-bottom: 20px;
-  animation: glitch 1s infinite;
-}
+      function collapseSky() {
+        let elapsed = (Date.now() - startTime) / 1000; // seconds
 
-.button {
-  display: inline-block;
-  padding: 12px 24px;
-  margin-top: 10px;
-  background-color: #4B0082;
-  color: white;
-  text-decoration: none;
-  font-weight: bold;
-  border-radius: 8px;
-  transition: background-color 0.3s;
-}
+        // Progress from 0 (blue) to 1 (storm) over 20 seconds
+        let progress = Math.min(elapsed / 20, 1);
 
-.button:hover {
-  background-color: #6E0D25;
-}
+        // Color from blue (135,206,235) to dark gray (60,60,70)
+        let startColor = [135, 206, 235];
+        let endColor = [60, 60, 70];
 
-@keyframes glitch {
-  0% { text-shadow: 2px 2px #6E0D25, -2px -2px #4B0082; }
-  25% { text-shadow: -2px 2px #6E0D25, 2px -2px #4B0082; }
-  50% { text-shadow: 2px -2px #6E0D25, -2px 2px #4B0082; }
-  75% { text-shadow: -2px -2px #6E0D25, 2px 2px #4B0082; }
-  100% { text-shadow: 2px 2px #6E0D25, -2px -2px #4B0082; }
-}
+        let r = Math.floor(startColor[0] + (endColor[0] - startColor[0]) * progress);
+        let g = Math.floor(startColor[1] + (endColor[1] - startColor[1]) * progress);
+        let b = Math.floor(startColor[2] + (endColor[2] - startColor[2]) * progress);
+
+        document.getElementById('sky').style.backgroundColor = `rgb(${r}, ${g}, ${b})`;
+      }
+
+      setInterval(collapseSky, 100); // update every 0.1s
+    };
+  </script>
+
+</body>
+</html>
