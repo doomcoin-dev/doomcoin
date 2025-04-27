@@ -8,41 +8,57 @@
 </head>
 <body>
 
-  <!-- Loading Screen -->
-  <div id="loading-screen">
-    <h2>Entering Collapse...</h2>
+  <div id="sky">
+    <div id="clouds"></div>
+    <div class="container">
+      <h1>Laugh. Collapse. Repeat.</h1>
+      <a href="#" class="button">Get DOOM</a>
+    </div>
   </div>
 
-  <!-- Main Content -->
-  <div class="container" style="display: none;">
-    <h1>Laugh. Collapse. Repeat.</h1>
-    <a href="#" class="button">Get DOOM</a>
-  </div>
-
-  <!-- JavaScript -->
   <script>
-  window.onload = function() {
-    // Hide loading screen after 2 seconds
-    setTimeout(function() {
-      document.getElementById('loading-screen').style.display = 'none';
-      document.querySelector('.container').style.display = 'flex';
-    }, 2000);
+    window.onload = function() {
+      // Hide loading screen (if you had one) - not needed here
+      let startTime = Date.now();
+      let lightningActive = false;
 
-    // Start random glitching after page loads
-    setInterval(function randomGlitch() {
-      if (Math.random() < 0.05) { // 5% chance every 2 seconds
-        document.body.classList.add('glitching');
-        setTimeout(function() {
-          document.body.classList.remove('glitching');
-        }, 500);
+      function collapseSky() {
+        let elapsed = (Date.now() - startTime) / 1000; // seconds
+
+        // Progress from 0 (blue) to 1 (dark storm) over 40 seconds
+        let progress = Math.min(elapsed / 40, 1);
+
+        // Change background color based on progress
+        let blueSky = [135, 206, 235]; // light blue
+        let darkSky = [50, 50, 60];    // soft dark
+
+        let r = Math.floor(blueSky[0] + (darkSky[0] - blueSky[0]) * progress);
+        let g = Math.floor(blueSky[1] + (darkSky[1] - blueSky[1]) * progress);
+        let b = Math.floor(blueSky[2] + (darkSky[2] - blueSky[2]) * progress);
+
+        document.getElementById('sky').style.backgroundColor = `rgb(${r}, ${g}, ${b})`;
+
+        // Start lightning flashes after 20s
+        if (elapsed > 20 && !lightningActive) {
+          lightningActive = true;
+          triggerLightning();
+        }
       }
-    }, 2000);
-  };
-</script>
 
+      function triggerLightning() {
+        setInterval(function() {
+          if (Math.random() < 0.1) { // 10% chance every second
+            document.getElementById('sky').style.backgroundColor = 'white';
+            setTimeout(function() {
+              collapseSky(); // revert to normal sky after flash
+            }, 100);
+          }
+        }, 1000);
+      }
 
+      setInterval(collapseSky, 100); // Update every 0.1s
+    };
+  </script>
 
 </body>
-
 </html>
-
