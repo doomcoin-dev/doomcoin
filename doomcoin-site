@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>DoomCoin</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- Loading Screen -->
+  <div id="loading-screen">
+    <h2>Entering Collapse...</h2>
+  </div>
+
+  <!-- Main Site Container -->
+  <div class="container" style="display: none;">
+    <img src="logo.png" alt="DoomCoin Logo" class="logo">
+    <h1>Laugh. Collapse. Repeat.</h1>
+    <a href="#" class="button">Get DOOM</a>
+  </div>
+
+  <!-- Scripts -->
+  <script>
+    // Loading screen collapse
+    window.onload = function() {
+      setTimeout(function() {
+        document.getElementById('loading-screen').style.display = 'none';
+        document.querySelector('.container').style.display = 'flex';
+      }, 2000);
+    };
+
+    // Random page glitch
+    function randomGlitch() {
+      if (Math.random() < 0.05) { // 5% chance every 2 seconds
+        document.body.classList.add('glitching');
+        setTimeout(() => {
+          document.body.classList.remove('glitching');
+        }, 500);
+      }
+    }
+    setInterval(randomGlitch, 2000);
+  </script>
+
+</body>
+</html>
