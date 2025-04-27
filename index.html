@@ -8,11 +8,28 @@
 </head>
 <body>
 
-  <div class="container">
+  <!-- Loading Screen -->
+  <div id="loading-screen">
+    <h2>Entering Collapse...</h2>
+  </div>
+
+  <!-- Main Content -->
+  <div class="container" style="display: none;">
     <h1>Laugh. Collapse. Repeat.</h1>
     <a href="#" class="button">Get DOOM</a>
   </div>
 
+  <!-- JavaScript -->
+  <script>
+    window.onload = function() {
+      setTimeout(function() {
+        document.getElementById('loading-screen').style.display = 'none';
+        document.querySelector('.container').style.display = 'flex';
+      }, 2000); // 2 seconds loading screen
+    };
+  </script>
+
 </body>
+
 </html>
 
