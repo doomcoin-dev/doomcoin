@@ -18,6 +18,11 @@ body {
 h1 {
   font-size: 2em;
   margin-bottom: 20px;
+  color: #FF0000;
+  position: relative;
+  animation: glitch 1s infinite;
+}
+
 }
 .button {
   display: inline-block;
@@ -66,6 +71,13 @@ h1 {
     transform: translateX(-50%) translateY(-40px) scale(1.5);
     opacity: 0;
   }
+}
+@keyframes glitch {
+  0% { text-shadow: 2px 2px #6E0D25, -2px -2px #4B0082; }
+  25% { text-shadow: -2px 2px #6E0D25, 2px -2px #4B0082; }
+  50% { text-shadow: 2px -2px #6E0D25, -2px 2px #4B0082; }
+  75% { text-shadow: -2px -2px #6E0D25, 2px 2px #4B0082; }
+  100% { text-shadow: 2px 2px #6E0D25, -2px -2px #4B0082; }
 }
 
 
